@@ -70,9 +70,10 @@ function buildCharts(sample) {
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var firstOtu_id = firstResult.otu_ids;
-    var firstOtu_labels = firstResult.sample_values.slice(0,10).reverse();
-    var firstSample_value = firstResult.otu_labels.slice(0,10).reverse();
-    var washFreq = firstResult.wfreq;
+    var firstOtu_labels = firstResult.otu_labels.slice(0,10).reverse();
+    var firstSample_value = firstResult.sample_values.slice(0,10).reverse();
+    var washFreq = sampleNumber.wfreq;
+    
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -133,12 +134,12 @@ function buildCharts(sample) {
       type: 'indicator',
       mode: 'gauge+number',
       gauge: {
-        axis: { range: [null, 500]},
+        axis: { range: [null, 10]},
         steps: [
           {range: [0, 2], color: 'red'},
           {range: [2, 4], color: 'orange'},
           {range: [4, 6], color: 'yellow'},
-          {range: [6, 8], color: 'light green'},
+          {range: [6, 8], color: 'greenYellow'},
           {range: [8, 10], color: 'green'}
         ],
       },
@@ -147,7 +148,7 @@ function buildCharts(sample) {
     
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = { 
-     
+     title: 'Bacteria Cultures per Sample'
     };
 
     // 6. Use Plotly to plot the gauge data and layout.
