@@ -72,8 +72,8 @@ function buildCharts(sample) {
     var firstOtu_id = firstResult.otu_ids;
     var firstOtu_labels = firstResult.otu_labels.slice(0,10).reverse();
     var firstSample_value = firstResult.sample_values.slice(0,10).reverse();
-    var washFreq = sampleNumber.wfreq;
-    
+    var washTest = data.metadata.filter((obj) => obj.id == sample)[0];
+    var washFreq = washTest.wfreq;
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -104,13 +104,13 @@ function buildCharts(sample) {
     // 1. Create the trace for the bubble chart.
     var bubbleData = [
       {
-        x: yticks,
-        y: firstSample_value,
-        text: firstOtu_labels,
+        x: firstResult.otu_ids.reverse(),
+        y: firstResult.sample_values.reverse(),
+        text: firstResult.otu_labels,
         mode: 'markers',
         marker: {
-          color: yticks,
-          size: firstSample_value
+          color: firstResult.otu_ids,
+          size: firstResult.sample_values
         }
       }
    
@@ -122,7 +122,7 @@ function buildCharts(sample) {
     };
 
     // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot('bubble', bubbleData, barLayout); 
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
 
     // 4. Create the trace for the gauge chart.
     var gaugeData = [
